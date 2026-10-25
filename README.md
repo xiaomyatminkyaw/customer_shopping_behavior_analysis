@@ -69,19 +69,14 @@ This project analyzes **3,900 customer records** to identify purchasing patterns
 
 ## 06 - Business Recommendations
 
-Based on the analysis, the following actions could help retailers improve customer engagement, loyalty, and promotional effectiveness.
+* **Validate Data Quality:** Investigate unusual gender, discount, and subscription patterns before making marketing decisions.
+* **Optimize Promotions:** Test targeted discounts and measure their impact on revenue and profit.
+* **Strengthen Customer Loyalty:** Refine customer segments and personalize retention strategies.
+* **Grow Product Performance:** Protect Clothing revenue while exploring cross-selling opportunities in Accessories and Footwear.
+* **Improve Customer Satisfaction:** Investigate lower-rated products and identify areas for improvement.
+* **Plan for Seasonality:** Use seasonal revenue patterns to guide marketing campaigns and inventory planning.
 
-* **🎯 Refine Discount Strategies** — Discounts did not correspond to higher average spending among male customers. Test targeted promotions and compare purchase behavior before expanding discount campaigns.
 
-* **💎 Strengthen Customer Loyalty** — With 79.9% of customers reporting 11 or more previous purchases, focus on retaining existing customers through loyalty rewards, personalized offers, and exclusive benefits.
-
-* **📩 Improve Subscription Engagement** — Subscribers and non-subscribers showed similar average spending. Test subscription benefits and targeted campaigns to determine whether they can increase sign-ups and long-term engagement.
-
-* **👕 Prioritize High-Revenue Categories** — Clothing generated 44.7% of total revenue. Maintain product availability in this category while exploring opportunities to grow Accessories, Footwear, and Outerwear.
-
-* **⭐ Improve Lower-Rated Products** — Shirts received the lowest average rating (3.62/5), while Gloves received the highest (3.86/5). Investigate customer feedback on lower-rated products to identify potential improvements.
-
-* **🔍 Validate Customer Data** — The dataset shows unusual patterns in discount usage and subscriptions across genders. Verify these records before using demographic findings to guide marketing decisions.
 
 
 ## 07 — Project Documentation
