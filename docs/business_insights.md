@@ -79,14 +79,36 @@
 
 ---
 
-## Strategic Priorities
+## Business Recommendations
 
-<ol>
-  <li><strong>Validate data quality.</strong> Investigate the gender, discount, and subscription patterns first.</li>
-  <li><strong>Measure promotional effectiveness.</strong> Use controlled experiments and profit-based metrics.</li>
-  <li><strong>Refine customer segmentation.</strong> Create more useful loyalty tiers and test targeted engagement.</li>
-  <li><strong>Optimize the product mix.</strong> Protect Clothing revenue and investigate weaker product categories.</li>
-</ol>
+Based on the analysis, the following actions could help improve customer insights, promotional decisions, and retail performance.
+
+### 1. Validate Customer Data Before Making Decisions
+
+The dataset shows an unusual pattern: no female customers used discounts or subscribed, while all subscribers were male and also reported using discounts. Investigate these records and verify the underlying data before using gender, discount usage, or subscription status to guide marketing decisions.
+
+### 2. Improve Promotional Effectiveness
+
+Male customers who used discounts had a slightly lower average purchase amount ($59.28) than those who did not ($59.98). This suggests that discount usage was not associated with higher average spending in this dataset. Test targeted promotions against a control group and evaluate incremental revenue, conversion, and profit margins before expanding discount campaigns.
+
+### 3. Develop More Meaningful Customer Loyalty Strategies
+
+Approximately 79.9% of customers had 11 or more previous purchases, indicating a customer base with substantial repeat-purchase activity. Develop actionable loyalty tiers using purchase frequency, recency, and spending value. Tailor retention campaigns and loyalty rewards to each segment, then measure repeat purchases and customer lifetime value where sufficient data is available.
+
+### 4. Protect Clothing Revenue and Explore Growth Opportunities
+
+Clothing generated $104,264, approximately 44.7% of total revenue, making it the largest product category. Maintain product availability and monitor customer demand in this category while investigating opportunities to grow Accessories and Footwear through product recommendations, bundles, and cross-selling. Evaluate performance using revenue, conversion, and profit margin rather than sales alone.
+
+### 5. Investigate Customer Satisfaction Across Products
+
+Average product ratings ranged from 3.62 to 3.86, with Gloves receiving the highest average rating (3.86) and Shirts the lowest (3.62). Review product-level feedback and customer complaints to identify potential improvement areas. Use additional review and return data to determine whether lower-rated products require changes to quality, sizing, descriptions, or customer support.
+
+### 6. Test Seasonal Marketing Opportunities
+
+Fall recorded the highest seasonal revenue at $60,018, followed by Summer at $55,777. Use these results as a starting point for seasonal campaign planning, inventory allocation, and product promotion. Before committing additional budget, compare seasonal demand across multiple periods and account for differences in customer volume and product availability.
+
+> **Business impact:** Prioritize trustworthy data, evidence-based promotions, customer retention, and product-level improvement. These recommendations should be validated with more detailed transactional and profitability data before major business decisions are made.
+
 
 ## Limitations & Next Steps
 
