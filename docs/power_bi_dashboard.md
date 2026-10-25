@@ -1,74 +1,112 @@
-# Power BI dashboard
+# Power BI Dashboard
 
-File: `dashboard/Customer_behavior_dashboard.pbix` · Canvas 1920×1080 · Source: PostgreSQL table `customer`.
+<p align="center">
+  <strong>RETAIL PERFORMANCE · CUSTOMER LOYALTY · PURCHASING INSIGHTS</strong><br />
+  <sub>Power BI Desktop · PostgreSQL · 1920 × 1080 canvas</sub>
+</p>
 
-Reading the file showed three pages. Items marked **to verify** or **to fix** were found during validation and are tracked in the validation checklist.
+---
 
-## Purpose of each page
+## 01 — Dashboard at a Glance
 
-| Page | Purpose | Main question |
-|---|---|---|
-| 1. Overview ("Customer Behavior") | High-level customers, revenue and spend by category and age group; subscription split | Who buys, how much, and what? |
-| 2. Customer Loyalty & Subscriptions | Segments, subscription, discount use by segment, purchase frequency | How loyal are customers and what do subscription and discounts do? |
-| 3. Products & Purchasing | Top-rated products, category revenue, seasonality, payment methods, discount effect | Which products, seasons and payment methods matter? |
+The dashboard transforms customer shopping data into three connected views, helping users explore revenue, customer segments, product performance, and purchasing preferences.
 
-Suggested page names: **Overview**, **Customer Loyalty & Subscriptions**, **Products & Purchasing**.
+|   3,900   |    $233,081   |     $59.76    |   3.75 / 5  |
+| :-------: | :-----------: | :-----------: | :---------: |
+| Customers | Total Revenue | Avg. Purchase | Avg. Rating |
 
-## KPI names and calculation definitions
+**Data source:** PostgreSQL table `customer`
 
-| KPI | Definition | Expected (no filters) |
-|---|---|---|
-| Number of customers | Distinct count of `customer_id` | 3,900 |
-| Total revenue (add this card) | Sum of `purchase_amount` | $233,081 |
-| Average purchase amount | Total revenue ÷ customers | $59.76 |
-| Average review rating | Average `review_rating` (after imputation) | 3.75 |
-| Loyal customers (page 2) | Customers with `previous_purchases` ≥ 11 | 3,116 |
-| Discount users (page 3) | Count of rows with `discount_applied` = Yes | 1,677 |
-| Customer Segment (column) | New = 1; Returning = 2–10; Loyal = 11+ | 83 / 701 / 3,116 |
+**Report file:** [`Customer_behavior_dashboard.pbix`](../dashboard/Customer_behavior_dashboard.pbix)
 
-DAX measures were not readable from the file; confirm these definitions in Model view.
+## 02 — Explore the Three Pages
 
-## Visuals and why they were selected
+### 01 · Overview
 
-| Page | Visual | Why |
-|---|---|---|
-| 1 | Donut: % of customers by subscription status | Two-part share of whole |
-| 1 | Column: customers by category (rename from "Sales by Category") | Compares category volume |
-| 1 | Column: revenue by category | Ranks categories by money |
-| 1 | Bar: customers by age group (rename from "Sales by Age Group") | Compares group size |
-| 1 | Bar: revenue by age group | Shows revenue contribution |
-| 2 | Donut: customer segmentation | Share of three segments. **To fix:** uses Minimum of `customer_id`; change to distinct count. |
-| 2 | Bar: subscription status | Subscriber counts. **To fix:** same aggregation issue. |
-| 2 | Column: discount usage by segment | Whether discount use differs by loyalty |
-| 2 | Column: purchase frequency | **To fix:** currently averages days per label; change to customer count by frequency. |
-| 3 | Bar: top 5 highest-rated products | Ranked comparison (Top N filter on average rating; ties at 3.78) |
-| 3 | Bar: purchase amount by category | Category revenue |
-| 3 | Pie: seasonal purchasing | Four slices, share of revenue |
-| 3 | Bar: payment method preferences | Ranked categories |
-| 3 | Pie: discount vs purchase amount | **To fix:** a pie of averages misleads; use a bar. |
-| All | KPI card strip | Headline metrics at a glance |
+<p align="center">
+  <img src="../image/overview.png" alt="Power BI customer behavior overview" width="100%" />
+</p>
 
-Design rules: navy (`#173b5b`) titles, consistent grid, same colour for the same meaning on every page, 12 pt minimum labels.
+**Business question:** Who buys, how much do they spend, and which categories contribute most?
 
-## Slicers and interactions
+* Headline KPIs for customers, revenue, average purchase, and rating.
+* Customer distribution and revenue by product category.
+* Age-group comparisons.
+* Subscription status overview.
 
-| Page | Slicers |
-|---|---|
-| 1 | Gender · Subscription Status · Category · Shipping Type |
-| 2 | Gender · Subscription Status · Age Group · Location |
-| 3 | Gender · Category · Season · Location · Shipping Type |
+**Design decision:** Use cards for headline metrics and bar or column charts for comparisons between categories and age groups.
 
-- Slicers work per page. Use **Sync slicers** if Gender or Subscription should carry across pages.
-- Expected behaviour worth documenting: selecting **Gender = Female** shows 1,248 customers and $75,191 revenue, and **no** subscribers or discount users (see finding 2 in the insights). A blank chart there is correct, not a bug.
-- Selecting **Subscription = Yes** shows 1,053 customers, all male.
-- Use Edit interactions to exclude any visual that should not react to a slicer.
+### 02 · Customer Loyalty & Subscriptions
 
-## Screenshots and navigation
+<p align="center">
+  <img src="../image/loyalty.png" alt="Power BI customer loyalty and subscription analysis" width="100%" />
+</p>
 
-| Page | Screenshot file |
-|---|---|
-| Overview | `screenshots/01_overview.png` |
-| Customer Loyalty & Subscriptions | `screenshots/02_loyalty.png` |
-| Products & Purchasing | `screenshots/03_products.png` |
+**Business question:** How are customers distributed across loyalty segments, and how do subscriptions and discounts relate to purchase history?
 
-Take screenshots at 1920×1080 with no slicers selected (File → Export → PDF, or Windows Snipping Tool at 100% zoom). Navigation: the pages appear as tabs at the bottom of the report. Consider adding a button row (Page navigator) in the title band so viewers can move between pages without the tab bar.
+* Customer segmentation: New, Returning, and Loyal.
+* Subscriber distribution.
+* Discount usage by segment.
+* Purchase frequency.
+
+**Design decision:** Use a correctly aggregated customer count for segment comparisons. Avoid averaging purchase-frequency days when the goal is to show how many customers belong to each frequency group.
+
+### 03 · Products & Purchasing
+
+<p align="center">
+  <img src="../image/purchasing.png" alt="Power BI product ratings and purchasing analysis" width="100%" />
+</p>
+
+**Business question:** Which products, categories, seasons, and payment methods stand out?
+
+* Top-rated products.
+* Revenue by category.
+* Seasonal revenue distribution.
+* Payment method preferences.
+* Discounted versus non-discounted purchases.
+
+**Design decision:** Use ranked bars for product ratings and a bar chart—not a pie chart—to compare average purchase amounts between discount groups.
+
+## 03 — KPI Definitions
+
+| KPI                 | Calculation                     | Expected result |
+| ------------------- | ------------------------------- | --------------: |
+| Number of customers | Distinct count of `customer_id` |           3,900 |
+| Total revenue       | Sum of `purchase_amount`        |        $233,081 |
+| Average purchase    | Revenue ÷ customers             |          $59.76 |
+| Average rating      | Average of `review_rating`      |            3.75 |
+| Loyal customers     | `previous_purchases` ≥ 11       |           3,116 |
+| Discount users      | `discount_applied` = Yes        |           1,677 |
+
+### Customer segmentation
+
+| Segment   | Previous purchases | Customers |
+| --------- | -----------------: | --------: |
+| New       |                  1 |        83 |
+| Returning |               2–10 |       701 |
+| Loyal     |                11+ |     3,116 |
+
+**Validation note:** Confirm the actual DAX measures and field aggregations in Power BI Model view. In particular, customer segments and subscriber counts must use appropriate counts, not the minimum of `customer_id`.
+
+## 04 — Filters & Interactions
+
+Slicers allow users to explore how purchasing patterns differ across customer groups.
+
+| Page                             | Recommended slicers                                  |
+| -------------------------------- | ---------------------------------------------------- |
+| Overview                         | Gender, Subscription Status, Category, Shipping Type |
+| Customer Loyalty & Subscriptions | Gender, Subscription Status, Age Group, Location     |
+| Products & Purchasing            | Gender, Category, Season, Location, Shipping Type    |
+
+### Important data behavior
+
+The dataset contains no female discount users or subscribers. Selecting **Female** should therefore show 1,248 customers, $75,191 revenue, and zero subscribers or discount users. Selecting **Subscription Status = Yes** should show 1,053 subscribers, all male.
+
+These patterns should be interpreted as potential data-quality issues, not general conclusions about real-world customers.
+
+---
+
+<p align="center">
+  <strong>From analytical queries to interactive business intelligence.</strong><br />
+  <sub>A three-page dashboard designed to make customer behavior easier to explore and interpret.</sub>
+</p>
