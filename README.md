@@ -2,7 +2,7 @@
 
 End-to-end retail analytics project: **Python** (cleaning) → **PostgreSQL** (business queries) → **Power BI** (3-page dashboard) → written insights and recommendations.
 
-![Dashboard overview](screenshots/01_overview.png)
+![Dashboard overview](https://github.com/xiaomyatminkyaw/customer_shopping_behavior_analysis/blob/82320bf3b6b7b030715894364dd24e86f2f39dcc/images/overview_1.png)
 
 ## 1. Project summary and business problem
 
