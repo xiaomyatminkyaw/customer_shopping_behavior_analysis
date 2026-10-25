@@ -1,67 +1,160 @@
-# Data cleaning
+# Data Cleaning & Preparation
 
-Notebook: `notebooks/Customer_Shopping_Behavior_Analysis.ipynb`
+<p align="center">
+  <strong>FROM RAW DATA TO ANALYSIS-READY DATA</strong><br />
+  <sub>Python · pandas · PostgreSQL</sub>
+</p>
 
-## Dataset source, size and columns
+---
 
-| Item | Detail |
-|---|---|
-| File | `customer_shopping_behavior.csv` |
-| Source | Add the original source and link here (not stated in the files provided) |
-| Rows / columns | 3,900 / 18 |
-| Grain | One row per customer (`Customer ID` is unique) |
+## 01 — Dataset at a Glance
 
-| Column | Type | Notes |
-|---|---|---|
-| Customer ID | int | 1–3,900 |
-| Age | int | 18–70 |
-| Gender | text | Male 2,652, Female 1,248 |
-| Item Purchased | text | 25 items |
-| Category | text | Clothing, Accessories, Footwear, Outerwear |
-| Purchase Amount (USD) | int | $20–$100, mean $59.76 |
-| Location | text | 50 US states |
-| Size, Color | text | 4 sizes, 25 colours |
-| Season | text | Fall, Spring, Summer, Winter |
-| Review Rating | float | 2.5–5.0 (37 blanks) |
-| Subscription Status | text | Yes / No |
-| Shipping Type | text | 6 types |
-| Discount Applied, Promo Code Used | text | Yes / No (identical on every row) |
-| Previous Purchases | int | 1–50, mean 25 |
-| Payment Method | text | 6 methods |
-| Frequency of Purchases | text | 7 labels |
+| Dataset attribute    | Details                          |
+| -------------------- | -------------------------------- |
+| Source file          | `customer_shopping_behavior.csv` |
+| Original size        | 3,900 rows × 18 columns          |
+| Data grain           | One row per customer             |
+| Unique identifier    | `Customer ID`                    |
+| Missing values       | 37 review ratings (0.9%)         |
+| Duplicate rows / IDs | 0 / 0                            |
 
-## Missing values and duplicates checks
+**Source:** The original dataset source and URL still need to be verified and documented.
 
-| Check | Result |
-|---|---|
-| Missing values | Only `Review Rating`: 37 of 3,900 (0.9%) |
-| Duplicate rows | 0 |
-| Duplicate Customer IDs | 0 |
-| Leading/trailing whitespace in text columns | None found |
-| Inconsistent category labels | None (4 categories, 4 seasons, 2 genders, 6 shipping types, 6 payment methods) |
-| Data types | Numeric fields are numeric; no conversion needed |
+### What the data covers
 
-## Cleaning and transformation decisions
+Customer demographics, purchased items, product categories, purchase amounts, locations, ratings, discounts, subscriptions, shipping, payment methods, purchase history, and purchase frequency.
 
-| Step | Decision | Reason |
-|---|---|---|
-| 1 | Fill missing `Review Rating` with the **median of the same category** | Median resists skew; category-level is more specific than global. Category medians: Accessories 3.8, Clothing 3.7, Footwear 3.8, Outerwear 3.8. The overall mean is 3.75 before and after. |
-| 2 | Rename columns: lower case, underscores, `purchase_amount_(usd)` → `purchase_amount` | SQL-friendly names |
-| 3 | Create `age_group` with `qcut(age, 4)`: Young Adult 18–31, Adult 32–44, Middle_aged 45–57, Senior 58–70 | Equal-sized groups for comparison |
-| 4 | Create `purchase_frequency_days` from frequency labels (Weekly 7; Fortnightly and Bi-Weekly 14; Monthly 30; Quarterly and Every 3 Months 90; Annually 365) | Numeric version of frequency |
-| 5 | Drop `promo_code_used` | Identical to `discount_applied` on all rows |
-| 6 | Load to PostgreSQL table `customer` with `to_sql` | Source for SQL and Power BI |
+| Data group       | Key fields                                 |
+| ---------------- | ------------------------------------------ |
+| Customer profile | Age, Gender, Location                      |
+| Product & sales  | Item Purchased, Category, Purchase Amount  |
+| Experience       | Review Rating, Shipping Type, Size, Color  |
+| Engagement       | Subscription Status, Discount Applied      |
+| Purchase history | Previous Purchases, Frequency of Purchases |
 
-## Final dataset structure and limitations
+## 02 — Data Quality Assessment
 
-Final table `customer`: 3,900 rows, 18 columns (17 original minus `promo_code_used`, plus `age_group` and `purchase_frequency_days`).
+The initial inspection identified one missing-value issue. Other validation checks found no duplicate records, duplicate customer IDs, unwanted text whitespace, or inconsistent category labels.
 
-Limitations and open items:
+<details>
+<summary><strong>Validation results</strong></summary>
 
-- **Bi-Weekly vs Fortnightly:** both mapped to 14 days. "Bi-Weekly" can also mean twice a week; confirm the source meaning. The same applies to "Every 3 Months" and "Quarterly" (both 90).
-- **Imputed ratings:** 37 values are estimates.
-- **Quartile age groups** are sample-specific, not standard bands.
-- **Structured fields:** every discount and every subscription belongs to a male customer, and every subscriber used a discount ([business_insights.md](business_insights.md), finding 2). This is unusual and should be checked with the data provider.
-- **No dates or channel field** (see [project_overview.md](project_overview.md)).
-- **Security:** the notebook contains hard-coded database credentials. Remove them and clear cell outputs before pushing to GitHub.
-- **Missing duplicates/inconsistency checks in the notebook:** the checks above were run during validation; add `df.duplicated().sum()` and `df['Customer ID'].is_unique` cells so the notebook documents them.
+| Check                  | Result                                 |
+| ---------------------- | -------------------------------------- |
+| Missing values         | 37 in `Review Rating`                  |
+| Duplicate records      | None                                   |
+| Duplicate customer IDs | None                                   |
+| Text whitespace        | No issues found                        |
+| Category consistency   | No inconsistent labels found           |
+| Data types             | Numeric fields already correctly typed |
+
+</details>
+
+## 03 — Cleaning & Transformation Pipeline
+
+<ol>
+  <li>
+
+**Handle missing review ratings**
+
+Filled the 37 missing values using the median rating within each product category, preserving category-specific rating patterns.
+
+  </li>
+  <li>
+
+**Standardize column names**
+
+Converted column names to lowercase, snake_case, and SQL-friendly names. Renamed `purchase_amount_(usd)` to `purchase_amount`.
+
+  </li>
+  <li>
+
+**Create age groups**
+
+Used `pandas.qcut()` to divide customers into four age groups for demographic comparisons.
+
+| Age group   | Age range |
+| ----------- | --------: |
+| Young Adult |     18–31 |
+| Adult       |     32–44 |
+| Middle_aged |     45–57 |
+| Senior      |     58–70 |
+
+  </li>
+  <li>
+
+**Convert purchase frequency to numeric intervals**
+
+Created `purchase_frequency_days` from the original frequency labels.
+
+| Frequency label            | Assigned days |
+| -------------------------- | ------------: |
+| Weekly                     |             7 |
+| Bi-Weekly / Fortnightly    |            14 |
+| Monthly                    |            30 |
+| Quarterly / Every 3 Months |            90 |
+| Annually                   |           365 |
+
+  </li>
+  <li>
+
+**Remove redundant information**
+
+Dropped `promo_code_used` because it was identical to `discount_applied` across all 3,900 rows.
+
+  </li>
+  <li>
+
+**Load into PostgreSQL**
+
+Loaded the prepared dataset into the `customer` table for SQL analysis and Power BI reporting.
+
+  </li>
+</ol>
+
+## 04 — Final Dataset
+
+<box border radius="lg" padding={4} gap={3}>
+  <grid columns={2} gap={3}>
+    <grid-item>
+      <text color="secondary" size="sm">Records</text>
+      <title size="xl">3,900</title>
+    </grid-item>
+    <grid-item>
+      <text color="secondary" size="sm">Final columns</text>
+      <title size="xl">18</title>
+    </grid-item>
+    <grid-item>
+      <text color="secondary" size="sm">New features</text>
+      <title size="xl">2</title>
+    </grid-item>
+    <grid-item>
+      <text color="secondary" size="sm">Removed columns</text>
+      <title size="xl">1</title>
+    </grid-item>
+  </grid>
+  <divider color="subtle"/>
+  <text color="secondary" size="sm">Final table: `customer` · PostgreSQL</text>
+</box>
+
+The final dataset retains 18 columns: 17 original columns after removing the redundant promo-code field, plus `age_group` and `purchase_frequency_days`.
+
+## 05 — Limitations & Data Quality Considerations
+
+* **Imputed ratings:** 37 review ratings are estimated rather than observed.
+* **Frequency assumptions:** Bi-Weekly and Fortnightly are both mapped to 14 days; Quarterly and Every 3 Months are mapped to 90 days. These interpretations should be confirmed against the source definitions.
+* **Age groups:** The age bands are sample-specific quartile groups, not universal demographic categories.
+* **Potential source-data anomaly:** All discount users and subscribers are male, and every subscriber used a discount. This pattern requires source validation.
+* **Limited analytical scope:** No transaction dates or sales-channel field are available, preventing time-series, retention, and online-versus-offline analysis.
+
+### Reproducibility & Security
+
+Notebook: [`Customer_Shopping_Behavior_Analysis.ipynb`](../notebooks/Customer_Shopping_Behavior_Analysis.ipynb)
+
+Before publishing, remove hard-coded database credentials, clear sensitive notebook outputs, and document the duplicate checks directly in the notebook.
+
+---
+
+<p align="center">
+  <strong>Prepared data. Reliable queries. Clearer business insights.</strong>
+</p>
