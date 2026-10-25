@@ -25,7 +25,7 @@
 ## 01 — Inside the Numbers
 
 <p align="center">
-  <img src="images/overview_1.png" alt="Customer Shopping Behavior Analysis — Power BI dashboard overview" width="100%" />
+  <img src="image/overview_1.png" alt="Customer Shopping Behavior Analysis — Power BI dashboard overview" width="100%" />
 </p>
 
 <p align="center">
@@ -213,37 +213,37 @@ Fall leads in revenue at $60,018, while Summer records $55,777. Average purchase
 
 ## 06 — Explore the Dashboard
 
-Three interactive Power BI pages turn customer data into a visual business story, from overall performance to customer loyalty and purchasing patterns.
-
-### 01 · Business Overview
-
 <p align="center">
-  <a href="https://github.com/xiaomyatminkyaw/customer_shopping_behavior_analysis/blob/55be307114ae4cfe82eafcb0c2821e5513c081fa/images/overview.png">
-    <img src="https://raw.githubusercontent.com/xiaomyatminkyaw/customer_shopping_behavior_analysis/55be307114ae4cfe82eafcb0c2821e5513c081fa/images/overview.png" alt="Business Overview Power BI Dashboard" width="100%" />
-  </a>
+  <strong>THREE PAGES. ONE CUSTOMER STORY.</strong>
 </p>
 
-An executive snapshot of retail performance, featuring key metrics, category revenue, and customer demographics.
+<p align="center">
+  Explore the interactive Power BI dashboard, from overall retail performance to customer loyalty and purchasing behavior.
+</p>
+
+### 01 · Overview
+
+<p align="center">
+  <img src="image/overview.png" alt="Additional Power BI dashboard overview screenshot" width="100%" />
+</p>
+
+The opening page provides a snapshot of retail performance, highlighting revenue, average purchase value, customer demographics, and product category contributions.
 
 ### 02 · Customer Loyalty & Subscriptions
 
 <p align="center">
-  <a href="https://github.com/xiaomyatminkyaw/customer_shopping_behavior_analysis/blob/55be307114ae4cfe82eafcb0c2821e5513c081fa/images/loyalty.png">
-    <img src="https://raw.githubusercontent.com/xiaomyatminkyaw/customer_shopping_behavior_analysis/55be307114ae4cfe82eafcb0c2821e5513c081fa/images/loyalty.png" alt="Customer Loyalty and Subscriptions Power BI Dashboard" width="100%" />
-  </a>
+  <img src="image/loyalty.png" alt="Customer loyalty, subscription, and discount analysis dashboard" width="100%" />
 </p>
 
-An exploration of customer segments, subscription behavior, purchase history, and discount usage.
+Explore customer segments, subscription patterns, previous purchases, and discount usage to understand how customer engagement differs across the dataset.
 
-### 03 · Products & Purchasing
+### 03 · Products & Purchasing Behavior
 
 <p align="center">
-  <a href="https://github.com/xiaomyatminkyaw/customer_shopping_behavior_analysis/blob/55be307114ae4cfe82eafcb0c2821e5513c081fa/images/purchasing.png">
-    <img src="https://raw.githubusercontent.com/xiaomyatminkyaw/customer_shopping_behavior_analysis/55be307114ae4cfe82eafcb0c2821e5513c081fa/images/purchasing.png" alt="Products and Purchasing Power BI Dashboard" width="100%" />
-  </a>
+  <img src="image/purchasing.png" alt="Product ratings, seasonal trends, and purchasing behavior dashboard" width="100%" />
 </p>
 
-A closer look at product ratings, seasonal revenue, payment preferences, and purchasing patterns.
+Investigate product ratings, seasonal revenue, payment preferences, and purchasing patterns to identify areas for further business investigation.
 
 **Explore the project files**
 
