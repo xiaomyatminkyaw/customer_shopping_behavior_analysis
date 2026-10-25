@@ -61,7 +61,7 @@ Retail businesses collect valuable customer data, but the real challenge is tran
 
 This project investigates customer demographics, purchasing frequency, product categories, subscriptions, discount usage, ratings, payment methods, shipping preferences, and seasonal patterns to uncover actionable business insights.
 
-**The objective:** Move beyond reporting numbers to explain what they mean for retail strategy.
+The **goal** is to identify useful patterns in the data and turn them into insights that can help retailers make better decisions about customer engagement, promotions, and loyalty.
 
 [Explore the full project background →](docs/project_overview.md)
 
@@ -252,96 +252,7 @@ Investigate product ratings, seasonal revenue, payment preferences, and purchasi
 * [SQL business analysis](sql/customer_behaviour_analysis_v2.sql)
 * [Python analysis notebook](notebooks/Customer_Shopping_Behavior_Analysis.ipynb)
 
-
-## 07 — Reproduce the Analysis
-
-Want to explore the workflow yourself? Follow these steps to reproduce the analysis locally.
-
-### Prerequisites
-
-* Python 3
-* PostgreSQL
-* Power BI Desktop
-* Git
-
-### Setup
-
-**1. Clone the repository**
-
-```bash
-git clone https://github.com/xiaomyatminkyaw/customer_shopping_behavior_analysis.git
-cd customer_shopping_behavior_analysis
-```
-
-**2. Install Python dependencies**
-
-```bash
-pip install pandas sqlalchemy psycopg2-binary jupyter
-```
-
-**3. Create the PostgreSQL database**
-
-```sql
-CREATE DATABASE customer_behavior;
-```
-
-Configure your connection credentials through environment variables or a local configuration file excluded from Git. Never commit database passwords or other secrets.
-
-**4. Prepare the dataset**
-
-Open and run:
-
-```text
-notebooks/Customer_Shopping_Behavior_Analysis.ipynb
-```
-
-Update the database connection for your own environment before running the notebook.
-
-**5. Execute the business queries**
-
-Run:
-
-```text
-sql/customer_behaviour_analysis_v2.sql
-```
-
-Compare the results with the expected outputs documented in the SQL script.
-
-**6. Open the Power BI dashboard**
-
-Open `dashboard/Customer_behavior_dashboard.pbix`, update its data source to your local PostgreSQL table, and refresh the data.
-
-For additional detail, see the [data cleaning documentation](docs/data_cleaning.md) and [SQL analysis documentation](docs/sql_analysis.md).
-
-## 08 — Project Structure
-
-```text
-customer_shopping_behavior_analysis/
-│
-├── README.md
-├── data/
-│   └── customer_shopping_behavior.csv
-├── notebooks/
-│   └── Customer_Shopping_Behavior_Analysis.ipynb
-├── sql/
-│   └── customer_behaviour_analysis_v2.sql
-├── dashboard/
-│   └── Customer_behavior_dashboard.pbix
-├── screenshots/
-│   ├── 01_overview.png
-│   ├── 02_loyalty.png
-│   └── 03_products.png
-├── images/
-│   └── overview_1.png
-└── docs/
-    ├── project_overview.md
-    ├── data_cleaning.md
-    ├── sql_analysis.md
-    ├── business_insights.md
-    └── power_bi_dashboard.md
-```
-
-## 09 — Limitations & Next Steps
+## 07 — Limitations & Next Steps
 
 Every analysis depends on the quality and scope of its data.
 
@@ -358,7 +269,7 @@ Every analysis depends on the quality and scope of its data.
 * Evaluate promotional performance using margin and incremental revenue.
 * Incorporate transaction-level data for cohort, retention, and time-series analysis.
 
-## 10 — What This Project Demonstrates
+## 8 — What This Project Demonstrates
 
 This project demonstrates an end-to-end analytics workflow: preparing data in Python, translating business questions into SQL, designing a multi-page Power BI dashboard, and communicating findings with business recommendations.
 
