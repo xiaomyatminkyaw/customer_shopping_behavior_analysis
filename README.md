@@ -67,9 +67,26 @@ This project analyzes **3,900 customer records** to identify purchasing patterns
 * **Subscriptions:** Subscribers and non-subscribers have similar average spending.
 * **Data quality:** The unusual relationship between gender, discounts, and subscriptions requires further validation.
 
-These are descriptive findings, not proof of causation or statistical significance.
+## 06 - Business Recommendations
 
-## 06 — Project Documentation
+Based on the analysis, the following actions could help retailers improve customer engagement, loyalty, and promotional effectiveness.
+
+* **🎯 Refine Discount Strategies** — Discounts did not correspond to higher average spending among male customers. Test targeted promotions and compare purchase behavior before expanding discount campaigns.
+
+* **💎 Strengthen Customer Loyalty** — With 79.9% of customers reporting 11 or more previous purchases, focus on retaining existing customers through loyalty rewards, personalized offers, and exclusive benefits.
+
+* **📩 Improve Subscription Engagement** — Subscribers and non-subscribers showed similar average spending. Test subscription benefits and targeted campaigns to determine whether they can increase sign-ups and long-term engagement.
+
+* **👕 Prioritize High-Revenue Categories** — Clothing generated 44.7% of total revenue. Maintain product availability in this category while exploring opportunities to grow Accessories, Footwear, and Outerwear.
+
+* **⭐ Improve Lower-Rated Products** — Shirts received the lowest average rating (3.62/5), while Gloves received the highest (3.86/5). Investigate customer feedback on lower-rated products to identify potential improvements.
+
+* **🔍 Validate Customer Data** — The dataset shows unusual patterns in discount usage and subscriptions across genders. Verify these records before using demographic findings to guide marketing decisions.
+
+*These recommendations are based on observed patterns in the available dataset. Further testing and additional data are needed to confirm their effectiveness.*
+
+
+## 07 — Project Documentation
 
 * [Project Overview](docs/project_overview.md)
 * [Data Cleaning & Preparation](docs/data_cleaning.md)
