@@ -83,8 +83,6 @@ Based on the analysis, the following actions could help retailers improve custom
 
 * **🔍 Validate Customer Data** — The dataset shows unusual patterns in discount usage and subscriptions across genders. Verify these records before using demographic findings to guide marketing decisions.
 
-*These recommendations are based on observed patterns in the available dataset. Further testing and additional data are needed to confirm their effectiveness.*
-
 
 ## 07 — Project Documentation
 
